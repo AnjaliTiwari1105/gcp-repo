@@ -9,7 +9,7 @@ def fetch_and_store(request):
 
     # Initialize Cloud Storage client
     client = storage.Client()
-    bucket_name = "your-bucket-name"  # Replace with your bucket name
+    bucket_name = " fpl-data-bucket-anjali"  
     bucket = client.bucket(bucket_name)
     blob = bucket.blob("fpl_data.json")
 
