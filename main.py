@@ -44,7 +44,7 @@ def fetch_and_store_fpl_data():
         )
         load_job.result()  # Wait for the job to complete
 
-        return jsonify({'status': 'success', 'message': 'Data loaded into BigQuery'}), 200
+        return jsonify({'status': 'success', 'message': 'Data is loaded into BigQuery'}), 200
 
     except requests.RequestException as e:
         return jsonify({'status': 'error', 'message': f'API request failed: {str(e)}'}), 500
