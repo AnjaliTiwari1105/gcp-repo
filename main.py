@@ -47,7 +47,7 @@ def fetch_and_store_fpl_data():
         return jsonify({'status': 'success', 'message': 'Data to loaded into BigQuery'}), 200
 
     except requests.RequestException as e:
-        return jsonify({'status': 'error', 'message': f'API request failed: {str(e)}'}), 500
+        return jsonify({'status': 'error', 'message': f'API request has failed: {str(e)}'}), 500
     except Exception as e:
         return jsonify({'status': 'error', 'message': f'Unexpected error: {str(e)}'}), 500
 
