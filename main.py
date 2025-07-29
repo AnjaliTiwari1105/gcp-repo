@@ -14,7 +14,7 @@ def fetch_and_store(request):
 
         # Initialize Cloud Storage client
         client = storage.Client()
-        bucket = client.bucket(" fpl-data-bucket-anjali")  # Replace with your actual bucket nam
+        bucket = client.bucket(" fpl-data-bucket-anjali")  # Replace with your actual bucket name
         blob = bucket.blob("fpl_data.json")
         blob.upload_from_string(data=json.dumps(data), content_type="application/json")
 
