@@ -1,26 +1,29 @@
 import json
 import requests
 from google.cloud import storage
-import functions_framework
+from flask import Flask
 
-@functions_framework.http
+app = Flask(__name__)
+
+@app.route("/", methods=["GET"])
 def fetch_and_store(request):
-    """Fetch data from the API and store it in Google Cloud Storage."""
     try:
         url = "https://fantasy.premierleague.com/api/bootstrap-static/"
         response = requests.get(url)
-        response.raise_for_status()  # Raise an error for bad responses
+        response.raise_for_status()
         data = response.json()
 
-        # Initialize Cloud Storage client
         client = storage.Client()
-        bucket = client.bucket(" fpl-data-bucket-anjali")  # Replace with your actual bucket name
+        bucket = client.bucket("fpl-data-bucket-anjali")
         blob = bucket.blob("fpl_data.json")
         blob.upload_from_string(data=json.dumps(data), content_type="application/json")
 
         return "Data uploaded to Cloud Storage", 200
 
-    except requests.exceptions.RequestException as e:
-        return f"Error fetching data from API: {str(e)}", 500
     except Exception as e:
-        return f"An error occurred: {str(e)}", 500
+        return f"Error: {str(e)}", 500
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
