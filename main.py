@@ -14,7 +14,7 @@ def fetch_and_store(request):
         data = response.json()
 
         client = storage.Client()
-        bucket = client.bucket("fpl-data-bucket-anjali")
+        bucket = client.bucket("fpl-data-bucket-anjali-test")
         blob = bucket.blob("fpl_data.json")
         blob.upload_from_string(data=json.dumps(data), content_type="application/json")
 
