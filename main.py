@@ -18,7 +18,7 @@ def fetch_and_store(request):
         blob = bucket.blob("fpl_data.json")
         blob.upload_from_string(data=json.dumps(data), content_type="application/json")
 
-        return "Data upload to Cloud Storage completed", 200
+        return "Data upload to Cloud Storage completed.", 200
 
     except Exception as e:
         return f"Error: {str(e)}", 500
