@@ -1,13 +1,10 @@
 steps:
-  # Step 1: Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/amplified-land-478620-p4/fpl-service', '.']
 
-  # Step 2: Push the image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/amplified-land-478620-p4/fpl-service']
 
-  # Step 3: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -19,12 +16,7 @@ steps:
       - --platform=managed
       - --allow-unauthenticated
 
-# ✅ Global build options (fix for logging error)
 options:
   logging: CLOUD_LOGGING_ONLY
-  # Alternatively, you can use:
-  # defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-  # or specify:
-  # logsBucket: gs://<your-logs-bucket-name>
 
 timeout: 900s
